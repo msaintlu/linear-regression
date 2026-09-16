@@ -1,6 +1,14 @@
+import { linear, curve, badRepartition, outlier } from './data';
+import { useState } from 'react';
+import { ResponsiveScatterplot } from './vizcomponents/Scatterplot';
+
+const MARGIN = { top: 15, right: 50, bottom: 70, left: 92 };
 const width = 1000;
 
 function App() {
+
+  const [data, setData] = useState(linear);
+
   return (
     <>
       <div>
@@ -12,7 +20,7 @@ function App() {
             marginBottom: 20,
           }}
         >
-          Life expectancy drops for countries with lower GDP per capita
+          Where would you draw the line?
         </p>
         <div
           style={{
@@ -23,12 +31,22 @@ function App() {
           }}
         />
       </div>
+
+      <div style={{ padding: 16 }}>
+
+        <button onClick={() => setData(linear)}>
+          Linear
+        </button>
+
+        <ResponsiveScatterplot data={data} MARGIN={MARGIN} />
+      </div>
+
       <div>
         <p style={{ fontSize: 14, fontStyle: "italic", marginTop: 0 }}>
-          Each bubble is a country. Bubble size proportional to population.
+          Blablabla.
         </p>
         <p style={{ fontSize: 14, fontStyle: "italic", marginTop: -20 }} >
-          Source: Gapminder.
+          Blabla.
         </p>
       </div>
     </>
