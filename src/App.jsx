@@ -45,7 +45,7 @@ function App() {
           Where would you draw the line?
         </p>
         <p style={{ fontSize: 18, fontStyle: "italic", marginTop: -25 }}>
-          Can you guess where the best linear fit to this point cloud will be?
+          Can you guess the correlation?
         </p>
       </div>
 
@@ -62,7 +62,7 @@ function App() {
 
       <div style={{ padding: 16 }}>
         <button onClick={handleShuffle}>Shuffle</button>
-        <button onClick={() => setShowLine(true)}>Show linear fit</button>
+        <button onClick={() => setShowLine(true)}>Show correlation</button>
       </div>
 
       <div className="heatmap-container" style={{ height: 600 }}>

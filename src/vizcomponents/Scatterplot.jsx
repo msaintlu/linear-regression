@@ -20,7 +20,6 @@ export const ResponsiveScatterplot = (props) => {
 };
 
 const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
-
   const boundsWidth = width - MARGIN.left - MARGIN.right;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
@@ -37,6 +36,25 @@ const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
     const intercept = yMean - slope * xMean;
     return { slope, intercept };
   };
+  // Coefficient of determination R²
+  const computeR2 = (data, slope, intercept) => {
+    const yMean = d3.mean(data, (d) => d.y);
+    const ssTotal = d3.sum(data, (d) => (d.y - yMean) ** 2);
+    const ssResidual = d3.sum(
+      data,
+      (d) => (d.y - (slope * d.x + intercept)) ** 2
+    );
+    return 1 - ssResidual / ssTotal;
+  };
+
+  console.log(
+    computeR2(
+      data,
+      linearRegression(data).slope,
+      linearRegression(data).intercept
+    )
+  );
+  
 
   return (
     <div style={{ position: "relative" }}>
@@ -46,19 +64,36 @@ const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
             <ScatterplotDot key={i} x={xScale(d.x)} y={yScale(d.y)} />
           ))}
           {showLine && (
-            <motion.line
-              x1={xScale(0)}
-              x2={xScale(10)}
-              y1={yScale(linearRegression(data).intercept)}
-              y2={yScale(
-                linearRegression(data).intercept +
-                  linearRegression(data).slope * 10
-              )}
-              stroke="black"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            />
+            <>
+              <motion.line
+                x1={xScale(0)}
+                x2={xScale(10)}
+                y1={yScale(linearRegression(data).intercept)}
+                y2={yScale(
+                  linearRegression(data).intercept +
+                    linearRegression(data).slope * 10
+                )}
+                stroke="black"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              />
+              <text x={xScale(9)} y={yScale(0)}>
+                R
+                <tspan dy="-5" fontSize="0.7em">
+                  2
+                </tspan>
+                <tspan dy="5" fontSize="1em">
+                  {" "}
+                  ={" "}
+                  {computeR2(
+                    data,
+                    linearRegression(data).slope,
+                    linearRegression(data).intercept
+                  ).toFixed(2)}
+                </tspan>
+              </text>
+            </>
           )}
         </g>
       </svg>
