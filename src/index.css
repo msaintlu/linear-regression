@@ -8,3 +8,16 @@
     font-variation-settings: "wdth" 100, "YTLC" 500;
   }
 }
+
+.button {
+  border-radius: 8px;
+  border: none;
+  padding: 2px 12px;
+  margin: 0px 8px 0px;
+  font-size: 12pt;
+  font-family: inherit;
+  background-color: #3b35612f;
+  color: #3b3500;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}

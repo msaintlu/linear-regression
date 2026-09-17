@@ -3,7 +3,7 @@ import { ResponsiveScatterplot } from './vizcomponents/Scatterplot';
 import * as d3 from "d3";
 
 
-const MARGIN = { top: 15, right: 50, bottom: 70, left: 92 };
+const MARGIN = { top: 0, right: 0, bottom: 0, left: 0 };
 const width = 1000;
 
 const generateData = (numberOfPoints = 13) => {
@@ -56,17 +56,33 @@ function App() {
           backgroundColor: "black",
           marginLeft: 15,
           marginBottom: 20,
-          marginTop: -10
+          marginTop: -10,
         }}
       />
 
       <div style={{ padding: 16 }}>
-        <button onClick={handleShuffle}>Shuffle</button>
-        <button onClick={() => setShowLine(true)}>Show correlation</button>
+        <button className="button" onClick={handleShuffle}>
+          Shuffle
+        </button>
+        <button className="button" onClick={() => setShowLine(true)}>
+          Show correlation
+        </button>
       </div>
 
-      <div className="heatmap-container" style={{ height: 600 }}>
-        <ResponsiveScatterplot data={data} MARGIN={MARGIN} showLine={showLine} />
+      <div
+        style={{
+          height: 600,
+          marginLeft: 200,
+          marginRight: 200,
+          marginTop: 30,
+          marginBottom: 80,
+        }}
+      >
+        <ResponsiveScatterplot
+          data={data}
+          MARGIN={MARGIN}
+          showLine={showLine}
+        />
       </div>
     </>
   );
