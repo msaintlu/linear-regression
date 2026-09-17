@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 import { useRef, useState, useMemo } from "react";
 import { useDimensions } from "./useDimensions";
-import { ScatterplotDot } from "./ScatterplotDot";
-import { motion } from "motion/react";
+//import { ScatterplotDot } from "./ScatterplotDot";
+import { motion, AnimatePresence } from "motion/react";
 
 
 export const ResponsiveScatterplot = (props) => {
@@ -51,14 +51,26 @@ const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
     return linearRegression(data).intercept + linearRegression(data).slope * x;
   };
   
+  const transition = { type: "spring", stiffness: 120, damping: 15 };
 
   return (
     <div style={{ position: "relative" }}>
       <svg width={width} height={height} style={{ overflow: "visible" }}>
         <g transform={`translate( ${MARGIN.left}, ${MARGIN.top} )`}>
-          {data.map((d, i) => (
-            <ScatterplotDot key={i} x={xScale(d.x)} y={yScale(d.y)} />
-          ))}
+          <AnimatePresence>
+            {data.map((d, i) => (
+              <motion.circle
+                key={i}
+                r={10}
+                stroke="rgb(60, 60, 60)"
+                fill={"#3B3561"}
+                fillOpacity={0.4}
+                initial={{ cx: xScale(5), cy: yScale(5) }}
+                animate={{ cx: xScale(d.x), cy: yScale(d.y) }}
+                transition={transition}
+              />
+            ))}
+          </AnimatePresence>
           {showLine && (
             <>
               <motion.line
