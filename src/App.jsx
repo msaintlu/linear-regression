@@ -33,11 +33,15 @@ function App() {
       </div>
 
       <div style={{ padding: 16 }}>
-
         <button onClick={() => setData(linear)}>
-          Linear
+          Shuffle
         </button>
+      </div>
 
+      <div
+        className="heatmap-container"
+        style={{height: 600}}
+      >
         <ResponsiveScatterplot data={data} MARGIN={MARGIN} />
       </div>
 
