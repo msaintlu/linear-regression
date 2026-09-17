@@ -6,52 +6,43 @@ const MARGIN = { top: 15, right: 50, bottom: 70, left: 92 };
 const width = 1000;
 
 function App() {
-
   const [data, setData] = useState(linear);
 
   return (
     <>
-      <div>
-        <p
-          style={{
-            fontWeight: "bolder",
-            fontSize: 26,
-            marginTop: 50,
-            marginBottom: 20,
-          }}
-        >
+      <div
+        style={{
+          marginTop: 50,
+          marginBottom: 20,
+          marginLeft: 15,
+        }}
+      >
+        <p style={{ fontWeight: "bolder", fontSize: 32 }}>
           Where would you draw the line?
         </p>
-        <div
-          style={{
-            width: { width },
-            height: "1px",
-            backgroundColor: "black",
-            marginTop: -10,
-          }}
-        />
-      </div>
-
-      <div style={{ padding: 16 }}>
-        <button onClick={() => setData(linear)}>
-          Shuffle
-        </button>
+        <p style={{ fontSize: 18, fontStyle: "italic", marginTop: -25 }}>
+          Can you guess where the best linear fit to this point cloud will be?
+        </p>
       </div>
 
       <div
-        className="heatmap-container"
-        style={{height: 600}}
-      >
-        <ResponsiveScatterplot data={data} MARGIN={MARGIN} />
+        style={{
+          width: { width },
+          height: "1px",
+          backgroundColor: "black",
+          marginLeft: 15,
+          marginBottom: 20,
+          marginTop: -10
+        }}
+      />
+
+      <div style={{ padding: 16 }}>
+        <button onClick={() => setData(linear)}>Shuffle</button>
+        <button onClick={() => setData(linear)}>Show linear fit</button>
       </div>
 
-      <div>
-        <p style={{ fontSize: 14, fontStyle: "italic", marginTop: 0 }}>
-          Blablabla.
-        </p>
-        <p style={{ fontSize: 14, fontStyle: "italic", marginTop: -20 }} >
-          Blabla.
-        </p>
+      <div className="heatmap-container" style={{ height: 600 }}>
+        <ResponsiveScatterplot data={data} MARGIN={MARGIN} />
       </div>
     </>
   );

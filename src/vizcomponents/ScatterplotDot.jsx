@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 const transition = { type: "spring", stiffness: 80, damping: 20 };
 
-export const ScatterplotItem = ({ x, y }) => {
+export const ScatterplotDot = ({ x, y }) => {
   return (
     <g>
       <circle
