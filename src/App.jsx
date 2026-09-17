@@ -1,12 +1,36 @@
-import { linear, curve, badRepartition, outlier } from './data';
 import { useState } from 'react';
 import { ResponsiveScatterplot } from './vizcomponents/Scatterplot';
+import * as d3 from "d3";
+
 
 const MARGIN = { top: 15, right: 50, bottom: 70, left: 92 };
 const width = 1000;
 
+const generateData = (numberOfPoints = 13) => {
+  const randomX = d3.randomInt(1, 11);
+  const randomNoise = d3.randomNormal(0, 2.5);
+
+  return Array.from({ length: numberOfPoints }, () => {
+    const x = randomX();
+
+    const y = 0.8 * x + randomNoise();
+
+    return {
+      x,
+      y: Math.max(1, Math.min(10, y)),
+    };
+  });
+};
+
 function App() {
-  const [data, setData] = useState(linear);
+  const [data, setData] = useState(() => generateData(13));
+  const [showLine, setShowLine] = useState(false);
+
+
+  const handleShuffle = () => {
+    setData(generateData(13));
+    setShowLine(false);
+  };
 
   return (
     <>
@@ -37,12 +61,12 @@ function App() {
       />
 
       <div style={{ padding: 16 }}>
-        <button onClick={() => setData(linear)}>Shuffle</button>
-        <button onClick={() => setData(linear)}>Show linear fit</button>
+        <button onClick={handleShuffle}>Shuffle</button>
+        <button onClick={() => setShowLine(true)}>Show linear fit</button>
       </div>
 
       <div className="heatmap-container" style={{ height: 600 }}>
-        <ResponsiveScatterplot data={data} MARGIN={MARGIN} />
+        <ResponsiveScatterplot data={data} MARGIN={MARGIN} showLine={showLine} />
       </div>
     </>
   );

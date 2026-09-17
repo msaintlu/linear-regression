@@ -19,7 +19,7 @@ export const ResponsiveScatterplot = (props) => {
   );
 };
 
-const Scatterplot = ({ width, height, data, MARGIN }) => {
+const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
 
   const boundsWidth = width - MARGIN.left - MARGIN.right;
   const boundsHeight = height - MARGIN.top - MARGIN.bottom;
@@ -45,16 +45,21 @@ const Scatterplot = ({ width, height, data, MARGIN }) => {
           {data.map((d, i) => (
             <ScatterplotDot key={i} x={xScale(d.x)} y={yScale(d.y)} />
           ))}
-          <line
-            x1={xScale(0)}
-            x2={xScale(10)}
-            y1={yScale(linearRegression(data).intercept)}
-            y2={yScale(
-              linearRegression(data).intercept +
-                linearRegression(data).slope * 10
-            )}
-            stroke="black"
-          />
+          {showLine && (
+            <motion.line
+              x1={xScale(0)}
+              x2={xScale(10)}
+              y1={yScale(linearRegression(data).intercept)}
+              y2={yScale(
+                linearRegression(data).intercept +
+                  linearRegression(data).slope * 10
+              )}
+              stroke="black"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          )}
         </g>
       </svg>
     </div>
