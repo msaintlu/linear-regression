@@ -47,13 +47,9 @@ const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
     return 1 - ssResidual / ssTotal;
   };
 
-  console.log(
-    computeR2(
-      data,
-      linearRegression(data).slope,
-      linearRegression(data).intercept
-    )
-  );
+  const f_x = (x) => {
+    return linearRegression(data).intercept + linearRegression(data).slope * x;
+  };
   
 
   return (
@@ -66,13 +62,10 @@ const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
           {showLine && (
             <>
               <motion.line
-                x1={xScale(0)}
+                x1={xScale(1)}
                 x2={xScale(10)}
-                y1={yScale(linearRegression(data).intercept)}
-                y2={yScale(
-                  linearRegression(data).intercept +
-                    linearRegression(data).slope * 10
-                )}
+                y1={yScale(f_x(1))}
+                y2={yScale(f_x(10))}
                 stroke="black"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}

@@ -4,7 +4,6 @@ import * as d3 from "d3";
 
 
 const MARGIN = { top: 0, right: 0, bottom: 0, left: 0 };
-const width = 1000;
 
 const generateData = (numberOfPoints = 13) => {
   const randomX = d3.randomInt(1, 11);
@@ -33,50 +32,46 @@ function App() {
   };
 
   return (
-    <>
-      <div
-        style={{
-          marginTop: 50,
-          marginBottom: 20,
-          marginLeft: 15,
-        }}
-      >
+    <div
+      style={{
+        marginTop: 20,
+        marginLeft: 400,
+        marginRight: 400,
+      }}
+    >
+      <div style={{ marginBottom: 20 }}>
         <p style={{ fontWeight: "bolder", fontSize: 32 }}>
           Where would you draw the line?
         </p>
-        <p style={{ fontSize: 18, fontStyle: "italic", marginTop: -25 }}>
-          Can you guess the correlation?
+        <p style={{ fontSize: 18, marginTop: -25 }}>
+          Guess the correlation
         </p>
       </div>
 
       <div
         style={{
-          width: { width },
           height: "1px",
           backgroundColor: "black",
-          marginLeft: 15,
-          marginBottom: 20,
+          marginBottom: 30,
           marginTop: -10,
         }}
       />
 
-      <div style={{ padding: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between"}}>
         <button className="button" onClick={handleShuffle}>
           Shuffle
         </button>
-        <button className="button" onClick={() => setShowLine(true)}>
-          Show correlation
-        </button>
+        <p style={{ fontSize: 18, fontStyle: "italic", marginTop:0, marginBottom:0}}>
+          Click on the graph to show the correlation
+        </p>
       </div>
 
       <div
         style={{
-          height: 600,
-          marginLeft: 200,
-          marginRight: 200,
-          marginTop: 30,
-          marginBottom: 80,
+          height: 500,
+          marginTop: 50,
         }}
+        onClick={() => setShowLine(true)}
       >
         <ResponsiveScatterplot
           data={data}
@@ -84,7 +79,7 @@ function App() {
           showLine={showLine}
         />
       </div>
-    </>
+    </div>
   );
 }
 
