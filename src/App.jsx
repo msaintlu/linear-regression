@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ResponsiveScatterplot } from './vizcomponents/Scatterplot';
 import * as d3 from "d3";
+import { translateAxis } from 'motion';
 
 
 const MARGIN = { top: 0, right: 0, bottom: 0, left: 0 };
@@ -32,13 +33,8 @@ function App() {
   };
 
   return (
-    <div
-      style={{
-        marginTop: 20,
-        marginLeft: 400,
-        marginRight: 400,
-      }}
-    >
+    <div className="main-container">
+ 
       <div style={{ marginBottom: 20 }}>
         <p style={{ fontWeight: "bolder", fontSize: 32 }}>
           Where would you draw the line?
@@ -48,20 +44,20 @@ function App() {
         </p>
       </div>
 
-      <div
-        style={{
-          height: "1px",
-          backgroundColor: "black",
-          marginBottom: 30,
-          marginTop: -10,
-        }}
-      />
+      <div className="line"/>
 
-      <div style={{ display: "flex", justifyContent: "space-between"}}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <button className="button" onClick={handleShuffle}>
           Shuffle
         </button>
-        <p style={{ fontSize: 18, fontStyle: "italic", marginTop:0, marginBottom:0}}>
+        <p
+          style={{
+            fontSize: 18,
+            fontStyle: "italic",
+            marginTop: 0,
+            marginBottom: 0,
+          }}
+        >
           Click on the graph to show the correlation
         </p>
       </div>
