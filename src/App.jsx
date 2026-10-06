@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { translateAxis } from 'motion';
 
 
-const MARGIN = { top: 0, right: 0, bottom: 0, left: 0 };
+const MARGIN = { top: 0, right: 20, bottom: 0, left: 0 };
 
 const generateData = (numberOfPoints = 13) => {
   const randomX = d3.randomInt(1, 11);

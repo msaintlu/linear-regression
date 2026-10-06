@@ -81,7 +81,7 @@ const Scatterplot = ({ width, height, data, MARGIN, showLine }) => {
                 animate={{ pathLength: 1 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
               />
-              <text x={xScale(9)} y={yScale(0)}>
+              <text x={xScale(8.5)} y={yScale(0)}>
                 R
                 <tspan dy="-5" fontSize="0.7em">
                   2
